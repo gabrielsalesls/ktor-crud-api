@@ -1,14 +1,16 @@
 package gabrielsalesls.github.io
 
+import gabrielsalesls.github.io.dao.DatabaseFactory
+import gabrielsalesls.github.io.plugins.configureRouting
+import gabrielsalesls.github.io.plugins.configureSerialization
 import io.ktor.server.application.*
-import gabrielsalesls.github.io.plugins.*
+import io.ktor.server.netty.*
 
 fun main(args: Array<String>): Unit =
-    io.ktor.server.netty.EngineMain.main(args)
+    EngineMain.main(args)
 
-@Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
 fun Application.module() {
+    DatabaseFactory.init(environment.config)
     configureSerialization()
-    configureDatabases()
     configureRouting()
 }
