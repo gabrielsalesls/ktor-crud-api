@@ -7,7 +7,6 @@ import gabrielsalesls.github.io.models.Place
 import org.jetbrains.exposed.sql.selectAll
 
 class PlaceRepository {
-
     suspend fun getAll(): List<Place> {
         val places: ArrayList<Place> = arrayListOf()
 
