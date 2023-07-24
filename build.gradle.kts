@@ -42,4 +42,6 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
     testImplementation("io.mockk:mockk:1.10.0")
+    testImplementation("io.ktor:ktor-client-content-negotiation:2.1.1")
+
 }
