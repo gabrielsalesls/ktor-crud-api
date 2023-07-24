@@ -2,7 +2,9 @@ package gabrielsalesls.github.io.service
 
 import gabrielsalesls.github.io.models.Place
 import gabrielsalesls.github.io.respository.PlaceRepository
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
@@ -35,15 +37,23 @@ class PlaceServiceTest {
             coVerify(exactly = 1) { repository.getAll() }
             Assert.assertEquals(1, result.size)
         }
-
-
     }
 
-
-
-
-
     @Test
-    fun save() {
+    fun `save place`() {
+        runBlocking {
+            val expected = Place(1, "name", "slug", "city", "state", "created", "uptaded")
+
+
+            coEvery { repository.save(any()) } returns listOf(expected)
+
+            val result = service.save(expected)
+
+            coVerify(exactly = 1) { repository.save(place = expected) }
+            Assert.assertEquals(1, result.size)
+            Assert.assertEquals(expected.name, result.first().name)
+
+        }
+
     }
 }

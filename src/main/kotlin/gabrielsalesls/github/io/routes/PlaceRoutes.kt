@@ -27,11 +27,12 @@ fun Route.placeRouting(service: PlaceService) {
             val placeModel: Place = placeRequest.toModel()
 
             val result = service.save(placeModel)
-            if (result != null) {
-                return@post call.respond(
-                    status = HttpStatusCode.Created,
-                    message = result.map { it.toResponse() })
-            }
+
+            //TODO: Validar caso o resultRow esteja vazio
+
+            return@post call.respond(
+                status = HttpStatusCode.Created,
+                message = result.map { it.toResponse() })
         }
     }
 }
